@@ -9,7 +9,7 @@ elif [ "$arg" == "del" ]; then
 	    rm -f $CONFIG/storage/$f;
     done;
 elif [ "$arg" == "ls" ]; then
-    tree "$CONFIG/storage";
+    tree "$CONFIG/storage" -I "index.html|favicon.ico|robots.txt";
 else
     cp $@ "$CONFIG/storage";
     /bin/env now "$CONFIG/storage";
