@@ -1,18 +1,23 @@
 #! /bin/bash
 arg=$1;
-STORAGE="$HOME/.config/up/public";
+UPROOT="$HOME/.config/up";
 
 if [ "$arg" == "del" ]; then
     for f in ${@:2}; do
-	    rm -f $STORAGE/$f;
+	rm -f "$UPROOT/public/$f";
     done;
+
+elif [ "$arg" == "sync" ]; then
+    /bin/env now "$UPROOT" --prod;
+
 elif [ "$arg" == "ls" ]; then
-    tree "$STORAGE";
+    tree "$UPROOT/public";
+
 else
-    cp $@ "$STORAGE" &&
-    /bin/env now "$STORAGE" &&
-    echo -e '\n\nLinks:' &&
-    for f in $@; do
+    cp $@ "$UPROOT/public" &&
+	/bin/env now "$UPROOT" --prod &&
+	echo -e '\n\nLinks:' &&
+	for f in $@; do
 	    echo -e " - https://up.mathix420.now.sh/$(basename $f)";
-    done;
+	done;
 fi;
