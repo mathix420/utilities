@@ -24,6 +24,7 @@ fi
 files=$(find $args \
 -name '*~' -type f \
 -or -name '#*#' -type f \
+-or -name '.#*' -type l \
 -or -name 'a.out' -type f \
 -or -name '*.dSYM' -type d \
 -or -name '.DS_Store' -type f \
