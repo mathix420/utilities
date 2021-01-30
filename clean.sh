@@ -6,12 +6,13 @@
 #    By: agissing <agissing@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/17 16:42:54 by agissing          #+#    #+#              #
-#    Updated: 2019/09/04 09:43:24 by agissing         ###   ########.fr        #
+#    Updated: 2021/01/30 18:20:29 by mathix           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 #! /bin/bash
 
 args=$@
+exec_name=`basename "$0"`
 
 # Test if no args put dot
 
@@ -38,7 +39,7 @@ files=$(find $args \
 # Test if no result, print an error
 
 if [ -z "$files" ]; then
-        echo "clean: Nothing to clean there!" 1>&2
+        echo "$exec_name: Nothing to clean there!" 1>&2
         exit 1
 fi
 
