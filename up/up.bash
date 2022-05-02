@@ -8,16 +8,16 @@ if [ "$arg" == "del" ]; then
     done;
 
 elif [ "$arg" == "sync" ]; then
-    /bin/env now "$UPROOT" --prod;
+    /bin/env vercel "$UPROOT" --prod;
 
 elif [ "$arg" == "ls" ]; then
     tree "$UPROOT/public";
 
 else
     cp $@ "$UPROOT/public" &&
-	/bin/env now "$UPROOT" --prod &&
+	/bin/env vercel "$UPROOT" --prod &&
 	echo -e '\n\nLinks:' &&
 	for f in $@; do
-	    echo -e " - https://up.mathix420.now.sh/$(basename $f)";
+	    echo -e " - https://up.mathix420.vercel.app/$(basename $f)";
 	done;
 fi;
