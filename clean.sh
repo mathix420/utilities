@@ -6,7 +6,7 @@
 #    By: agissing <agissing@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/17 16:42:54 by agissing          #+#    #+#              #
-#    Updated: 2021/01/30 18:20:29 by mathix           ###   ########.fr        #
+#    Updated: 2022/05/24 14:34:25 by agissing         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 #! /bin/bash
@@ -23,16 +23,18 @@ fi
 # Find files to clean
 
 files=$(find $args \
--name '*~' -type f \
--or -name '#*#' -type f \
--or -name '.#*' -type l \
--or -name 'a.out' -type f \
--or -name '*.dSYM' -type d \
--or -name '.DS_Store' -type f \
--or -name '.zcompdump*' -type f \
--or -name '__pycache__' -type d \
--or -name '*.pyc' -type f \
--or -name '*egg-info' -type d \
+\( \
+  -name '*~' -type f \
+  -or -name '#*#' -type f \
+  -or -name '.#*' -type l \
+  -or -name 'a.out' -type f \
+  -or -name '*.dSYM' -type d \
+  -or -name '.DS_Store' -type f \
+  -or -name '.zcompdump*' -type f \
+  -or -name '__pycache__' -type d \
+  -or -name '*.pyc' -type f \
+  -or -name '*egg-info' -type d \
+\) -delete -print \
 2>> /dev/null)
 
 
@@ -46,7 +48,3 @@ fi
 for var in $(echo "$files"); do
         echo $var
 done
-
-# Remove all the junk files
-
-rm -rf $files;
