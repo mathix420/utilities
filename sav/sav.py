@@ -48,9 +48,9 @@ def build_backup(dest, targets):
 
         args = ['-r'] if os.path.isdir(target) else []
 
-        if not os.path.isdir(target):
-            parent_folders = '/'.join(out.split('/')[:-1])
-            subprocess.call(['mkdir', '-p', parent_folders])
+        # Creating parent folders if needed
+        parent_folders = '/'.join(out.split('/')[:-1])
+        subprocess.call(['mkdir', '-p', parent_folders])
 
         if os.path.isdir(target):
             subprocess.call(['rm', '-rf', out])
