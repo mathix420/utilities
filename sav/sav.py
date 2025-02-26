@@ -58,7 +58,7 @@ def build_backup(dest, targets):
         subprocess.call(['cp', *args, target, out])
 
 
-def main(config, dest, clean=False):
+def main(config, dest):
     conf_dict = get_config(config)
     subprocess.call(['mkdir', '-p', dest])
 
@@ -71,8 +71,7 @@ def main(config, dest, clean=False):
         subprocess.call(['git', 'config', '--local', 'user.email', EMAIL], cwd=sub_dest)
         subprocess.call(['git', 'config', '--local', 'user.name', NAME], cwd=sub_dest)
 
-        if clean:
-            subprocess.call(CLEAN_ARGS, cwd=sub_dest)
+        subprocess.call(CLEAN_ARGS, cwd=sub_dest)
 
         subprocess.call(['git', 'add', '.'], cwd=sub_dest)
         subprocess.call(['git', 'commit', '-m', f'[AUTO-COMMIT] {datetime.now()}'], cwd=sub_dest)
@@ -93,12 +92,10 @@ if __name__ == '__main__':
                         default=DEFAULT_CONFIG_PATH, help='path of the yaml config file.')
     parser.add_argument('-d', '--dest-path',
                        default=DEFAULT_DESTINATION_PATH, help='temp destination path.')
-    parser.add_argument('-x', '--clean', action='store_true',
-                        help='execute the clean command before pushing files.')
     parser.add_argument('-r', '--reverse', action='store_true')
     options = parser.parse_args()
 
     if options.reverse:
         reverse(options.config_file, options.dest_path)
     else:
-        main(options.config_file, options.dest_path, options.clean)
+        main(options.config_file, options.dest_path)
